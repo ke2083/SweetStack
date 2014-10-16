@@ -1,0 +1,22 @@
+{
+  "name": "SweetStack",
+  "version": "0.0.1",
+  "authors": [
+    "Kaylee Elúvian <Kaylee.Eluvian@hotmail.com>"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.2.0"
+  }
+}
