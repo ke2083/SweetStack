@@ -7,7 +7,7 @@ SweetStack runs server-side and allows a user to input their test code and run i
 
 Screenshots
 -----------
-![The home page](https://raw.githubusercontent.com/ke2083/SweetStack/master/SweetStack/imgs/home.png])
+![The home page](https://raw.githubusercontent.com/ke2083/SweetStack/master/SweetStack/imgs/home.png)
 
 ![The results page](https://raw.githubusercontent.com/ke2083/SweetStack/master/SweetStack/imgs/testRuns.png)
 
