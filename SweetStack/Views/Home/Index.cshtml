@@ -4,115 +4,123 @@
 
 <h2>New test</h2>
 <div class="row">
-    <div class="col-md-3">
-        <h3>Syntax</h3>
-        <dl>
-            <dt>open</dt>
-            <dd>
-                Go to a url
-                <br />
-                <code>open -> http://www.bing.com</code>
-            </dd>
-            <dt>click</dt>
-            <dd>
-                Click on the matching element<br />
-                <code>click -> #myBtn</code>
-            </dd>
-            <dt>wait</dt>
-            <dd>
-                Pause for seconds
-                <br />
-                <code>wait -> 2</code>
-            </dd>
-            <dt>
-                await
-            </dt>
-            <dd>
-                Pause until the matched element exists
-                <br />
-                <code>await -> #myBtn</code>
-            </dd>
-            <dt>type</dt>
-            <dd>
-                Type keys to the matching element
-                <br />
-                <code>type .myTxtBox -> This is my test input</code>
-            </dd>
-            <dt>proof</dt>
-            <dd>
-                Takes a screenshot
-                <br />
-                <code>proof -> homepage.png</code>
-            </dd>
-            <dt>-></dt>
-            <dd>
-                Specifies what follows as a string of text
-                <br />
-                <code>
-                    type #txtBox -> Kaylee Eluvian
-                </code>
-            </dd>
-            <dt>#</dt>
-            <dd>
-                Comment
-                <br />
-                <code># This is a comment</code>
-            </dd>
-        </dl>
-        <h3>Tests</h3>
-        <dl>
-            <dt>text</dt>
-            <dd>
-                Checks that the specified text exists on the page
-                <br />
-                <code>text -> This text should appear</code>
-            </dd>
-            <dt>value</dt>
-            <dd>
-                <p>
-                    Gets the value of the specified element
-                    <br />
-                    Checks that a value <em>exactly</em> equals a string
-                    <br />
-                    <code>
-                        type #txtBox -> Kaylee Eluvian
-                    </code>
-                    <br />
-                    <code>
-                        value #txtBox => Kaylee Eluvian
-                    </code>
-                </p>
-                <p>
-                    Checks that a value <em>contains</em> a string
-                    <br />
-                    <code>
-                        type #txtBox -> Kaylee Eluvian
-                    </code>
-                    <br />
-                    <code>
-                        value #txtBox ~> Eluvian
-                    </code>
-                </p>
-                <p>
-                    Checks that a value <em>does not</em> contain a string
-                    <code>
-                        type #txtBox -> Kaylee Eluvian
-                    </code>
-                    <br />
-                    <code>
-                        value #txtBox !> Kalyee
-                    </code>
-                </p>
-            </dd>
-            <dt>chose</dt>
-            <dd>
-                Gets whether the specified element is checked/selected
-                <br />
-                <code>chose -> #myChkBox</code>
-            </dd>
-        </dl>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Syntax</h3>
+                <dl>
+                    <dt>size</dt>
+                    <dd>
+                        Simulate a device (default is desktop)
+                        <br />
+                        <code>size -> smartphone</code><br />
+                        <code>size -> phablet</code><br />
+                        <code>size -> minitablet</code><br />
+                        <code>size -> tablet</code><br />
+                        <code>size -> desktop</code>
+                    </dd>
+                    <dt>open</dt>
+                    <dd>
+                        Go to a url
+                        <br />
+                        <code>open -> http://www.bing.com</code>
+                    </dd>
+                    <dt>click</dt>
+                    <dd>
+                        Click on the matching element<br />
+                        <code>click -> #myBtn</code>
+                    </dd>
+                    <dt>wait</dt>
+                    <dd>
+                        Pause for seconds
+                        <br />
+                        <code>wait -> 2</code>
+                    </dd>
+                    <dt>type</dt>
+                    <dd>
+                        Type keys to the matching element
+                        <br />
+                        <code>type .myTxtBox -> This is my test input</code>
+                    </dd>
+                    <dt>proof</dt>
+                    <dd>
+                        Takes a screenshot
+                        <br />
+                        <code>proof -> homepage.png</code>
+                    </dd>
+                    <dt>-></dt>
+                    <dd>
+                        Specifies what follows as a string of text
+                        <br />
+                        <code>
+                            type #txtBox -> Kaylee Eluvian
+                        </code>
+                    </dd>
+                    <dt>#</dt>
+                    <dd>
+                        Comment
+                        <br />
+                        <code># This is a comment</code>
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <h3>Tests</h3>
+                <dl>
+                    <dt>text</dt>
+                    <dd>
+                        Checks that the specified text exists on the page
+                        <br />
+                        <code>text -> This text should appear</code>
+                    </dd>
+                    <dt>value</dt>
+                    <dd>
+                        <p>
+                            Gets the value of the specified element
+                            <br />
+                            Checks that a value <em>exactly</em> equals a string
+                            <br />
+                            <code>
+                                type #txtBox -> Kaylee Eluvian
+                            </code>
+                            <br />
+                            <code>
+                                value #txtBox => Kaylee Eluvian
+                            </code>
+                        </p>
+                        <p>
+                            Checks that a value <em>contains</em> a string
+                            <br />
+                            <code>
+                                type #txtBox -> Kaylee Eluvian
+                            </code>
+                            <br />
+                            <code>
+                                value #txtBox ~> Eluvian
+                            </code>
+                        </p>
+                        <p>
+                            Checks that a value <em>does not</em> contain a string
+                            <code>
+                                type #txtBox -> Kaylee Eluvian
+                            </code>
+                            <br />
+                            <code>
+                                value #txtBox !> Kalyee
+                            </code>
+                        </p>
+                    </dd>
+                    <dt>chose</dt>
+                    <dd>
+                        Gets whether the specified element is checked/selected
+                        <br />
+                        <code>chose -> #myChkBox</code>
+                    </dd>
+                </dl>
+            </div>
+        </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8">
         <h3>Test code</h3>
         <div id="validation"></div>
         <div>
@@ -121,14 +129,14 @@
                 proof -> bing.png
                 type input.b_searchbox -> javascript
                 click -> #sb_form_go
-                wait 1
+                wait -> 1
                 text -> 18,000,000 results
                 proof -> bing_search.png
             </textarea>
         </div>
         <p>
             <button class="btn btn-success" id="submitSuite">Validate</button>
-            <button class="btn btn-default" id="runSuite">Run</button>
+            @Html.ActionLink("Run", "Index", new { controller = "Runs" }, new { @class = "btn btn-default", id = "runSuite" })
         </p>
     </div>
 </div>

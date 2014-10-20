@@ -25,7 +25,7 @@ namespace SweetStack.BusinessLogic
                 process.Dispose();
         }
 
-        public PhantomLogger(Process p, string processName)
+        public PhantomLogger(Process p, string processName, string sweetStackCode)
         {
             process = p;
             name = processName;
@@ -34,21 +34,24 @@ namespace SweetStack.BusinessLogic
             context.Tests.Add(new SweetTest
             {
                 Name = processName,
-                Timestamp = DateTime.Now
+                Timestamp = DateTime.Now,
+                SweetStackCode = sweetStackCode
             });
             context.SaveChanges();
         }
 
-        private void SaveLog(string message)
+        private void SaveLog(string message, bool completed)
         {
-            var test = context.Tests.Find(name);
-            if (test.Messages == null) test.Messages = new List<TestLog>();
-
-            test.Messages.Add(new TestLog
+            var test = context.Tests.Find(name);           
+            test.Completed = completed;
+            var msg = new TestLog
             {
                 Id = Guid.NewGuid(),
-                Message = message
-            });
+                Message = message,
+                Test = test.Name
+            };
+
+            context.Messages.Add(msg);
             context.SaveChanges();
         }
 
@@ -64,7 +67,7 @@ namespace SweetStack.BusinessLogic
                     if (string.IsNullOrEmpty(log)) log = process.StandardError.ReadToEnd();
                     if (!process.HasExited && !process.Responding) process.Kill();
 
-                    SaveLog(log);
+                    SaveLog(log, true);
                     process.Dispose();
                     end = true;
                     return;
@@ -74,10 +77,10 @@ namespace SweetStack.BusinessLogic
                 {
                     log = process.StandardOutput.ReadToEnd();
                     process.StandardOutput.DiscardBufferedData();
-                    SaveLog(log);
+                    SaveLog(log, false);
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
         }
     }

@@ -1,0 +1,40 @@
+﻿@model SweetStack.Models.TestRun
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<h3>@Model.Timestamp.ToString("HH:mm dd/MM/yyyy")</h3>
+<div class="row">
+    <div class="col-md-6">
+        <pre>@Model.SweetStackCode</pre>
+        <h3>Screenshots</h3>
+        @foreach (var img in Model.Screenshots)
+        {
+            <img src="@img" />
+        }
+    </div>
+    <div class="col-md-6">
+        <h4>Output</h4>
+        @foreach (var result in Model.FormattedResults)
+        {
+            if (result.Status == SweetStack.DomainObjects.TestMessage.StatusTypes.Pass)
+            {
+                <p class="alert alert-success">@Html.Raw(result.Message)</p>
+            }
+            else if (result.Status == SweetStack.DomainObjects.TestMessage.StatusTypes.Fail)
+            {
+                <p class="alert alert-danger">@Html.Raw(result.Message)</p>
+            }
+            else if (result.Status == SweetStack.DomainObjects.TestMessage.StatusTypes.Information)
+            {
+                <p class="alert alert-info">@Html.Raw(result.Message)</p>
+            }
+            else
+            {
+                <p class="alert alert-warning">@Html.Raw(result.Message)</p>
+            }
+        }
+    </div>
+</div>

@@ -43,7 +43,7 @@
 
             });
 
-            $('#runSuite').click(function () {
+            $('#runSuite').click(function (e) {
 
                 var code = $('#sweetStackCode').val();
                 $.post('/Parse/Run', { sweetStackCode: code }, function (result) {
@@ -60,11 +60,13 @@
                         err += '</ul>';
 
                         $('#validation').removeClass('alert alert-success').addClass('alert alert-danger').html(err)
+                        e.preventDefault();
+                        return false;
                     }
 
                 });
 
-                return false;
+                
 
             });
 

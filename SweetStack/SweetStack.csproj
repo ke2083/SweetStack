@@ -112,6 +112,7 @@
     <Compile Include="DomainObjects\PhantomScript.cs" />
     <Compile Include="DomainObjects\SweetTest.cs" />
     <Compile Include="DomainObjects\TestLog.cs" />
+    <Compile Include="DomainObjects\TestMessage.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -130,6 +131,7 @@
     <Compile Include="Parsers\SweetStackToPhantom\Parsers\TextParser.cs" />
     <Compile Include="Parsers\SweetStackToPhantom\Parsers\TypeParser.cs" />
     <Compile Include="Parsers\SweetStackToPhantom\Parsers\ValueParser.cs" />
+    <Compile Include="Parsers\SweetStackToPhantom\Parsers\ViewportParser.cs" />
     <Compile Include="Parsers\SweetStackToPhantom\Parsers\WaitParser.cs" />
     <Compile Include="Parsers\SweetStackToPhantom\SweetStack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,6 +145,7 @@
     <Content Include="Views\_viewstart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Runs\Index.cshtml" />
+    <Content Include="Views\Runs\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

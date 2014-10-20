@@ -17,18 +17,25 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @item.Name
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Timestamp)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Name }) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Timestamp)
+            </td>
+            <td>
+                @if (item.Completed)
+                {
+                    @Html.ActionLink("Details", "Details", new { id = item.Name })
+                }
+                else{
+                 <span>Running...</span>   
+                }
+            </td>
+        </tr>
+    }
 
 </table>

@@ -27,6 +27,7 @@ namespace SweetStack.Parsers.SweetStackToPhantom
             Parsers.Add("wait", WaitParser.Parse);
             Parsers.Add("chose", ChoseParser.Parse);
             Parsers.Add("text", TextParser.Parse);
+            Parsers.Add("size", ViewportParser.Parse);
         }
 
         public ParseResult ParseToPhantom(IList<string> commands)
@@ -55,7 +56,7 @@ namespace SweetStack.Parsers.SweetStackToPhantom
 
             // Inject jQuery
             var positionOfOpen = script.FindIndex(c => c.Name == "open");
-            if (positionOfOpen > -1) script.Insert(positionOfOpen + 1, new Command("include") { Line = Js.Ln().Append(Js.Fn("page.includeJs").Arg("'http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'")), Callback = true });
+            //if (positionOfOpen > -1) script.Insert(positionOfOpen + 1, new Command("include") { Line = Js.Ln().Append(Js.Fn("page.includeJs").Arg("'http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'")), Callback = true });
 
             // Wrap all timeouts in an extra timeout (bug with injectJs in Phantom)
             var wrappedTimeouts = new List<CommandBase>();

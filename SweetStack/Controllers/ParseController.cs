@@ -35,18 +35,19 @@ namespace SweetStack.Controllers
             if (!code.Success) return Json(code);
 
             var tmp = Guid.NewGuid().ToString();
-            System.IO.Directory.CreateDirectory("c:\\SweetStack\\" + tmp);
-            System.IO.File.WriteAllLines(string.Format("c:\\SweetStack\\{0}\\{0}.js", tmp), new string[] { code.Phantom });
-            var info = new ProcessStartInfo("c:\\phantomjs\\phantomjs.exe", string.Format("c:\\SweetStack\\{0}\\{0}.js", tmp))
+            var siteRoot = Server.MapPath("~/Content");
+            System.IO.Directory.CreateDirectory(siteRoot + "\\" + tmp);
+            System.IO.File.WriteAllLines(string.Format("{1}\\{0}\\{0}.js", tmp, siteRoot), new string[] { code.Phantom });
+            var info = new ProcessStartInfo("c:\\phantomjs\\phantomjs.exe", string.Format("\"{1}\\{0}\\{0}.js\"", tmp, siteRoot))
             {
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
-                WorkingDirectory = "c:\\SweetStack\\" + tmp
+                WorkingDirectory = String.Format("{0}\\{1}", siteRoot, tmp)
             };
             var p = Process.Start(info);
-            var logger = new PhantomLogger(p, tmp);
+            var logger = new PhantomLogger(p, tmp, sweetStackCode);
             ThreadPool.QueueUserWorkItem((obj) => logger.Log());
             return null;
 

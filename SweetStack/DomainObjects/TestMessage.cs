@@ -7,14 +7,17 @@ using System.Text;
 
 namespace SweetStack.DomainObjects
 {
-    public class TestLog
+    public class TestMessage
     {
-        [Key]
-        public Guid Id { get; set; }
+        public enum StatusTypes
+        {
+            Pass,
+            Fail,
+            Information,
+            Warning
+        }
 
+        public StatusTypes Status { get; set; }
         public string Message { get; set; }
-
-        public string Test { get; set; }
-
     }
 }

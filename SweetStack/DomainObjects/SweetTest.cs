@@ -11,8 +11,9 @@ namespace SweetStack.DomainObjects
     {
         [Key]
         public string Name { get; set; }
-
-        public List<TestLog> Messages { get; set; }
         public DateTime Timestamp { get; set; }
+        public bool Completed { get; set; }
+        public string SweetStackCode { get; set; }
+  
     }
 }
