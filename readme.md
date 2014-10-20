@@ -7,9 +7,9 @@ SweetStack runs server-side and allows a user to input their test code and run i
 
 Screenshots
 -----------
-!(The home page)[https://raw.githubusercontent.com/ke2083/SweetStack/master/SweetStack/imgs/home.png]
+![The home page](https://raw.githubusercontent.com/ke2083/SweetStack/master/SweetStack/imgs/home.png])
 
-!(The results page)[https://raw.githubusercontent.com/ke2083/SweetStack/master/SweetStack/imgs/testRuns.png]
+![The results page](https://raw.githubusercontent.com/ke2083/SweetStack/master/SweetStack/imgs/testRuns.png)
 
 Roadmap
 -------
@@ -34,7 +34,7 @@ Example:
 
 ### Commands
 
-`size
+`size`
 
 Simulate a device (default is desktop) 
 
@@ -44,43 +44,43 @@ Simulate a device (default is desktop)
 	size -> tablet
 	size -> desktop
 
-`open
+`open`
 
 Go to a url 
 
 	open -> http://www.bing.com
 
-`click
+`click`
 
 Click on the matching element
 
 	click -> #myBtn
 
-`wait
+`wait`
 
 Pause for seconds 
 
 	wait -> 2
 
-`type
+`type`
 
 Type keys to the matching element 
 
 	type .myTxtBox -> This is my test input
 
-`proof
+`proof`
 
 Takes a screenshot 
 
 	proof -> homepage.png
 
-`->
+`->`
 
 Specifies what follows as a string of text 
 
 	type #txtBox -> Kaylee Eluvian
 
-`#
+`#`
 
 Comment 
 
@@ -88,13 +88,13 @@ Comment
 
 ### Tests
 
-`text
+`text`
 
 Checks that the specified text exists on the page 
 
 	text -> This text should appear
 
-`value
+`value`
 
 Gets the value of the specified element 
 
@@ -112,7 +112,7 @@ Checks that a value does not contain a string type #txtBox -> Kaylee Eluvian
 
 	value #txtBox !> Kalyee
 
-`chose
+`chose`
 
 Gets whether the specified element is checked/selected 
 
