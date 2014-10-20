@@ -146,6 +146,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Runs\Index.cshtml" />
     <Content Include="Views\Runs\Details.cshtml" />
+    <Content Include="readme.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
