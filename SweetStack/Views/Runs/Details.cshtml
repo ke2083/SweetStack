@@ -5,15 +5,23 @@
 }
 
 <h2>Details</h2>
-<h3>@Model.Timestamp.ToString("HH:mm dd/MM/yyyy")</h3>
+<h3>Run at: @Model.Timestamp.ToString("HH:mm dd/MM/yyyy")</h3>
 <div class="row">
     <div class="col-md-6">
         <pre>@Model.SweetStackCode</pre>
         <h3>Screenshots</h3>
-        @foreach (var img in Model.Screenshots)
-        {
-            <img src="@img" />
-        }
+        <p>(Ordered alphabetically)</p>
+        <div class="row">
+            @foreach (var img in Model.Screenshots) // Note that screenshots come out last-first
+            {
+                <div class="col-md-3">
+                    <a href="@img.Value" data-lightbox="results">
+                        <small>@img.Key</small><br />
+                        <img src="/Img/Thumbnail/?path=@img.Value" alt="@img.Key" class="img-responsive" />
+                    </a>
+                </div>
+            }
+        </div>
     </div>
     <div class="col-md-6">
         <h4>Output</h4>

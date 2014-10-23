@@ -13,7 +13,7 @@ namespace SweetStack.Parsers.SweetStackToPhantom.Parsers
     {
         public static CommandBase Parse(string command, int line, ParseResult result)
         {
-            var components = command.Split(("->").ToCharArray()).Where(c => !string.IsNullOrEmpty(c)).ToArray();
+            var components = command.Split(new string[] { "->" }, StringSplitOptions.RemoveEmptyEntries).ToArray();
             if (components.Length != 2)
             {
                 result.Success = false;

@@ -14,15 +14,15 @@ namespace SweetStack.Parsers.SweetStackToPhantom.Parsers
 
         public static Command Parse(string command, int line, ParseResult result)
         {
-            var components = command.Split(("->").ToCharArray());
-            if (components.Length != 3)
+            var components = command.Split(new string[] { "->" }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+            if (components.Length != 2)
             {
                 result.Success = false;
                 result.Errors.Add(string.Format("Line {0}: Open command should be in format 'open -> url'", line));
                 return null;
             }
 
-            var url = components[2];
+            var url = components[1];
 
             return new Command("open")
             {

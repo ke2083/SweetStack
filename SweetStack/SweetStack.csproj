@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BusinessLogic\PhantomLogger.cs" />
+    <Compile Include="Controllers\ImgController.cs" />
     <Compile Include="Controllers\ParseController.cs" />
     <Compile Include="Controllers\RunsController.cs" />
     <Compile Include="DataAccess\LogContext.cs" />

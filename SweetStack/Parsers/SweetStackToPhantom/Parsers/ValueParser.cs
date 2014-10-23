@@ -13,13 +13,13 @@ namespace SweetStack.Parsers.SweetStackToPhantom.Parsers
         public static CommandBase Parse(string command, int line, ParseResult result)
         {
             var valueCommand = command.Substring(5);
-            char[] splitter = new char[2];
+            var splitter = string.Empty;
             if (valueCommand.Contains("=>"))
-                splitter = ("=>").ToCharArray();
+                splitter = ("=>");
             else if (valueCommand.Contains("~>"))
-                splitter = ("~>").ToCharArray();
+                splitter = ("~>");
             else if (valueCommand.Contains("!>"))
-                splitter = ("!>").ToCharArray();
+                splitter = ("!>");
             else
             {
                 result.Success = false;
@@ -27,7 +27,7 @@ namespace SweetStack.Parsers.SweetStackToPhantom.Parsers
                 return null;
             }
 
-            var components = valueCommand.Split(splitter).Where(c => !string.IsNullOrEmpty(c)).ToArray();
+            var components = valueCommand.Split(new string[]{splitter}, StringSplitOptions.RemoveEmptyEntries).ToArray();
             var element = components[0];
             var value = components[1];
 

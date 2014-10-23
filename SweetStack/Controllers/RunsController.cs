@@ -67,13 +67,13 @@ namespace SweetStack.Controllers
                 allImages.AddRange(jpgs);
                 allImages.AddRange(gifs);
 
-                var imageList = new List<string>();
+                var imageList = new Dictionary<string, string>();
                 foreach (var img in allImages)
                 {
-                    imageList.Add(string.Format("/Content/{0}/{1}", test.Name, img.Name));
+                    imageList.Add(img.Name, string.Format("/Content/{0}/{1}", test.Name, img.Name));
                 }
 
-                model.Screenshots = imageList;
+                model.Screenshots = imageList.OrderBy(i => i.Key).ToDictionary(i=>i.Key, i=>i.Value);
                 model.FormattedResults = formattedMessage;
                 model.Timestamp = test.Timestamp;
                 model.SweetStackCode = test.SweetStackCode;

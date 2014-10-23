@@ -9,7 +9,7 @@ namespace SweetStack.Models
     public class TestRun
     {
         public List<TestMessage> FormattedResults { get; set; }
-        public List<string> Screenshots { get; set; }
+        public Dictionary<string, string> Screenshots { get; set; }
         public DateTime Timestamp { get; set; }
         public string SweetStackCode { get; set; }
     }
