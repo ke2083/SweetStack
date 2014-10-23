@@ -26,10 +26,10 @@ namespace SweetStack.Parsers.SweetStackToPhantom.Parsers
             {
                 Line = Js.Ln().Append(Js.Fn("page.evaluate")
                             .Arg(Js.Fn("function")
-                                .Ln(Js.Ln().Append("function fireEvent(element,event) {   if (document.createEvent) {  var evt = document.createEvent('HTMLEvents');evt.initEvent(event, true, true );return !element.dispatchEvent(evt);} else {var evt = document.createEventObject();return element.fireEvent('on'+event,evt)}}"))
+                                .Ln(Js.Ln().Append("function eventFire(el, etype){  if (el.fireEvent) {    el.fireEvent('on' + etype);  } else {    var evObj = document.createEvent('Events');    evObj.initEvent(etype, true, false);    el.dispatchEvent(evObj);  }}"))
                                 .Ln(
                                     Js.Ln().Append(
-                                        Js.Str(string.Format("fireEvent($({0})[0], 'click')", element.Clean()))
+                                        Js.Str(string.Format("eventFire($({0})[0], 'click')", element.Clean()))
                                     )
                                 )
                             ))
