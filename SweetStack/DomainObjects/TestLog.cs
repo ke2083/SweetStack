@@ -16,5 +16,7 @@ namespace SweetStack.DomainObjects
 
         public string Test { get; set; }
 
+        public virtual TestInstance TestRun { get; set; }
+
     }
 }

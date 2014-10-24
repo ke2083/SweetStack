@@ -15,7 +15,9 @@ namespace SweetStack.BusinessLogic
         private readonly LogContext context;
         private readonly Process process;
         private readonly string name;
+        private readonly Guid sweetTestId;
         private readonly DateTime startTime;
+        private readonly Guid testRunId;
 
         public void Dispose()
         {
@@ -25,33 +27,59 @@ namespace SweetStack.BusinessLogic
                 process.Dispose();
         }
 
-        public PhantomLogger(Process p, string processName, string sweetStackCode)
+        public PhantomLogger(Process p, Guid sweetTestId, Guid testRunId, string name, string sweetStackCode)
         {
             process = p;
-            name = processName;
+            this.sweetTestId = sweetTestId;
             startTime = DateTime.Now;
             context = new LogContext();
-            context.Tests.Add(new SweetTest
+
+            // Do we already have this test?
+            if (!context.SweetTests.Any(t => t.Id == sweetTestId))
             {
-                Name = processName,
-                Timestamp = DateTime.Now,
-                SweetStackCode = sweetStackCode
+                context.SweetTests.Add(new SweetTest
+                {
+                    Name = name,
+                    Id = sweetTestId,
+                    Timestamp = DateTime.Now,
+                    SweetStackCode = sweetStackCode
+                });
+                context.SaveChanges();
+            }
+
+            var sweetTest = context.SweetTests.Find(sweetTestId);
+            this.testRunId = testRunId;
+            sweetTest.Instances.Add(new TestInstance()
+            {
+                Completed = false,
+                Ended = null,
+                Id = testRunId,
+                Started = DateTime.Now,
+                SweetTest = sweetTest
             });
+
             context.SaveChanges();
         }
 
         private void SaveLog(string message, bool completed)
         {
-            var test = context.Tests.Find(name);           
-            test.Completed = completed;
+            var test = context.SweetTests.Find(sweetTestId);
+            var run = test.Instances.Find(t=>t.Id == testRunId);
+            run.Completed = completed;
+            if (completed)
+            {
+                run.Ended = DateTime.Now;
+            }
+
             var msg = new TestLog
             {
                 Id = Guid.NewGuid(),
                 Message = message,
-                Test = test.Name
+                Test = test.Name,
+                TestRun = run
             };
 
-            context.Messages.Add(msg);
+            run.Messages.Add(msg);
             context.SaveChanges();
         }
 

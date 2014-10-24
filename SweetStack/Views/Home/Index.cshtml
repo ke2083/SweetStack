@@ -2,6 +2,68 @@
     ViewBag.Title = "Index";
 }
 
+<script>
+
+        $(document).ready(function () {
+
+            $('#submitSuite').click(function () {
+
+                var code = $('#sweetStackCode').val();
+                $.post('/Parse/Validate', { sweetStackCode: code }, function (result) {
+
+                    if (result.Success) {
+                        $('#validation').removeClass('alert alert-danger').addClass('alert alert-success').html('This is valid Sweet Stack code :)')
+                    }
+                    else {
+                        var err = "<ul>";
+                        for (var i = 0; i < result.Errors.length; i++) {
+                            err += '<li>' + result.Errors[i] + '</li>';
+                        }
+
+                        err += '</ul>';
+
+                        $('#validation').removeClass('alert alert-success').addClass('alert alert-danger').html(err)
+                    }
+
+                });
+
+                return false;
+
+            });
+
+            $('#runSuite').click(function (e) {
+
+                var code = $('#sweetStackCode').val();
+                var name = $('#testName').val();
+                $.post('/Parse/Run', { sweetStackCode: code, name: name }, function (result) {
+
+                    if (result.Success) {
+                        $('#validation').removeClass('alert alert-danger').addClass('alert alert-success').html('This is valid Sweet Stack code :)')
+                    }
+                    else {
+                        var err = "<ul>";
+                        for (var i = 0; i < result.Errors.length; i++) {
+                            err += '<li>' + result.Errors[i] + '</li>';
+                        }
+
+                        err += '</ul>';
+
+                        $('#validation').removeClass('alert alert-success').addClass('alert alert-danger').html(err)
+                        e.preventDefault();
+                        return false;
+                    }
+
+                });
+
+
+
+            });
+
+        });
+
+
+</script>
+
 <h2>New test</h2>
 <div class="row">
     <div class="col-md-4">
@@ -123,20 +185,21 @@
     <div class="col-md-8">
         <h3>Test code</h3>
         <div id="validation"></div>
+        <input type="text" required title="Tests need a title" class="col-md-12" value="UntitledTest" id="testName" />
         <div>
             <textarea class="col-md-12" style="height: 30em" id="sweetStackCode">
-                open -> http://www.bing.com
-                proof -> bing.png
-                type input.b_searchbox -> javascript
-                click -> #sb_form_go
-                wait -> 1
-                text -> 18,000,000 results
-                proof -> bing_search.png
+open -> http://www.bing.com
+proof -> bing.png
+type input.b_searchbox -> javascript
+click -> #sb_form_go
+wait -> 1
+text -> 18,000,000 results
+proof -> bing_search.png
             </textarea>
         </div>
         <p>
             <button class="btn btn-success" id="submitSuite">Validate</button>
-            @Html.ActionLink("Run", "Index", new { controller = "Runs" }, new { @class = "btn btn-default", id = "runSuite" })
+            @Html.ActionLink("Save & Run", "Index", new { controller = "Runs" }, new { @class = "btn btn-default", id = "runSuite" })
         </p>
     </div>
 </div>

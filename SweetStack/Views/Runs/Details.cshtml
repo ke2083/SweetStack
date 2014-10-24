@@ -27,15 +27,15 @@
         <h4>Output</h4>
         @foreach (var result in Model.FormattedResults)
         {
-            if (result.Status == SweetStack.DomainObjects.TestMessage.StatusTypes.Pass)
+            if (result.Status == SweetStack.DomainObjects.FormattedTestMessage.StatusTypes.Pass)
             {
                 <p class="alert alert-success">@Html.Raw(result.Message)</p>
             }
-            else if (result.Status == SweetStack.DomainObjects.TestMessage.StatusTypes.Fail)
+            else if (result.Status == SweetStack.DomainObjects.FormattedTestMessage.StatusTypes.Fail)
             {
                 <p class="alert alert-danger">@Html.Raw(result.Message)</p>
             }
-            else if (result.Status == SweetStack.DomainObjects.TestMessage.StatusTypes.Information)
+            else if (result.Status == SweetStack.DomainObjects.FormattedTestMessage.StatusTypes.Information)
             {
                 <p class="alert alert-info">@Html.Raw(result.Message)</p>
             }

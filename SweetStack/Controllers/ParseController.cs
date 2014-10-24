@@ -29,25 +29,26 @@ namespace SweetStack.Controllers
         }
 
         [HttpPost]
-        public ActionResult Run(string sweetStackCode)
+        public ActionResult Run(string name, string sweetStackCode)
         {
             var code = ParseCode(sweetStackCode);
             if (!code.Success) return Json(code);
 
-            var tmp = Guid.NewGuid().ToString();
+            var sweetTestId = Guid.NewGuid();
+            var testRunId = Guid.NewGuid();
             var siteRoot = Server.MapPath("~/Content");
-            System.IO.Directory.CreateDirectory(siteRoot + "\\" + tmp);
-            System.IO.File.WriteAllLines(string.Format("{1}\\{0}\\{0}.js", tmp, siteRoot), new string[] { code.Phantom });
-            var info = new ProcessStartInfo("c:\\phantomjs\\phantomjs.exe", string.Format("\"{1}\\{0}\\{0}.js\"", tmp, siteRoot))
+            System.IO.Directory.CreateDirectory(siteRoot + "\\" + testRunId);
+            System.IO.File.WriteAllLines(string.Format("{1}\\{0}\\{0}.js", testRunId, siteRoot), new string[] { code.Phantom });
+            var info = new ProcessStartInfo("c:\\phantomjs\\phantomjs.exe", string.Format("\"{1}\\{0}\\{0}.js\"", testRunId, siteRoot))
             {
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
-                WorkingDirectory = String.Format("{0}\\{1}", siteRoot, tmp)
+                WorkingDirectory = String.Format("{0}\\{1}", siteRoot, testRunId)
             };
             var p = Process.Start(info);
-            var logger = new PhantomLogger(p, tmp, sweetStackCode);
+            var logger = new PhantomLogger(p, sweetTestId, testRunId, name, sweetStackCode);
             ThreadPool.QueueUserWorkItem((obj) => logger.Log());
             return null;
 

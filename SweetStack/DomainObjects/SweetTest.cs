@@ -9,11 +9,19 @@ namespace SweetStack.DomainObjects
 {
     public class SweetTest
     {
+        /// <summary>
+        /// Initializes a new instance of the SweetTest class.
+        /// </summary>
+        public SweetTest()
+        {
+            Instances = new List<TestInstance>();
+        }
         [Key]
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public DateTime Timestamp { get; set; }
-        public bool Completed { get; set; }
         public string SweetStackCode { get; set; }
+        public virtual List<TestInstance> Instances { get; set; }
   
     }
 }

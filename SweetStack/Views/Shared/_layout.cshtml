@@ -13,68 +13,10 @@
 </head>
 <body class="container-fluid">
     <ul>
-        <li>@Html.ActionLink("Completed tests", "Index", new { controller = "Runs" })</li>
+        <li>@Html.ActionLink("Tests", "Index", new { controller = "Tests" })</li>
+        <li>@Html.ActionLink("Test Runs", "Index", new { controller = "Runs" })</li>
     </ul>
     @RenderBody()
-    <script>
 
-        $(document).ready(function () {
-
-            $('#submitSuite').click(function () {
-
-                var code = $('#sweetStackCode').val();
-                $.post('/Parse/Validate', { sweetStackCode: code }, function (result) {
-
-                    if (result.Success) {
-                        $('#validation').removeClass('alert alert-danger').addClass('alert alert-success').html('This is valid Sweet Stack code :)')
-                    }
-                    else {
-                        var err = "<ul>";
-                        for (var i = 0; i < result.Errors.length; i++) {
-                            err += '<li>' + result.Errors[i] + '</li>';
-                        }
-
-                        err += '</ul>';
-
-                        $('#validation').removeClass('alert alert-success').addClass('alert alert-danger').html(err)
-                    }
-
-                });
-
-                return false;
-
-            });
-
-            $('#runSuite').click(function (e) {
-
-                var code = $('#sweetStackCode').val();
-                $.post('/Parse/Run', { sweetStackCode: code }, function (result) {
-
-                    if (result.Success) {
-                        $('#validation').removeClass('alert alert-danger').addClass('alert alert-success').html('This is valid Sweet Stack code :)')
-                    }
-                    else {
-                        var err = "<ul>";
-                        for (var i = 0; i < result.Errors.length; i++) {
-                            err += '<li>' + result.Errors[i] + '</li>';
-                        }
-
-                        err += '</ul>';
-
-                        $('#validation').removeClass('alert alert-success').addClass('alert alert-danger').html(err)
-                        e.preventDefault();
-                        return false;
-                    }
-
-                });
-
-                
-
-            });
-
-        });
-
-
-    </script>
 </body>
 </html>

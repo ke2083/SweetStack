@@ -104,6 +104,7 @@
     <Compile Include="Controllers\ImgController.cs" />
     <Compile Include="Controllers\ParseController.cs" />
     <Compile Include="Controllers\RunsController.cs" />
+    <Compile Include="Controllers\TestsController.cs" />
     <Compile Include="DataAccess\LogContext.cs" />
     <Compile Include="DomainObjects\CommandBase.cs" />
     <Compile Include="DomainObjects\Commands.cs" />
@@ -112,8 +113,9 @@
     <Compile Include="DomainObjects\ParseResult.cs" />
     <Compile Include="DomainObjects\PhantomScript.cs" />
     <Compile Include="DomainObjects\SweetTest.cs" />
+    <Compile Include="DomainObjects\TestInstance.cs" />
     <Compile Include="DomainObjects\TestLog.cs" />
-    <Compile Include="DomainObjects\TestMessage.cs" />
+    <Compile Include="DomainObjects\FormattedTestMessage.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -147,6 +149,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Runs\Index.cshtml" />
     <Content Include="Views\Runs\Details.cshtml" />
+    <Content Include="Views\Tests\Create.cshtml" />
+    <Content Include="Views\Tests\Delete.cshtml" />
+    <Content Include="Views\Tests\Details.cshtml" />
+    <Content Include="Views\Tests\Edit.cshtml" />
+    <Content Include="Views\Tests\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

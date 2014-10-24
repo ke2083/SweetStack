@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SweetStack.DomainObjects
 {
-    public class TestMessage
+    public class FormattedTestMessage
     {
         public enum StatusTypes
         {
