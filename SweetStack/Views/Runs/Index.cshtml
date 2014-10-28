@@ -4,14 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Test Runs</h2>
+<h1><span class="sweetTitle">SweetTest</span> Runs</h1>
 @if (Model.Any(t => t.Completed == false))
 {
     <div class="alert alert-warning">
-        Some tests are still running <button id="reload" class="btn btn-small btn-info">Refresh</button> 
+        Some tests are still running <button id="reload" class="btn btn-small btn-info">Refresh</button>
     </div>
 }
-<table class="table">
+<table class="table table-responsive">
     <tr>
         <th>
             Name
@@ -27,7 +27,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="alert @(item.Messages.Any(m=>m.Message.Contains("FAIL")) ? "alert-danger" : item.Messages.Any(m=>m.Message.Contains("PASS")) ? "alert-success" : "alert-info")">
             <td>
                 @item.SweetTest.Name
             </td>
@@ -40,10 +40,11 @@
             <td>
                 @if (item.Completed)
                 {
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
                 }
-                else{
-                 <span>Running...</span>   
+                else
+                {
+                    <span>Running...</span>
                 }
             </td>
         </tr>

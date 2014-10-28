@@ -4,13 +4,15 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-<h3>Run at: @Model.Timestamp.ToString("HH:mm dd/MM/yyyy")</h3>
+<h1><span>SweetTest</span> Details</h1>
+<h2>Run <small>@Model.Timestamp.ToString("HH:mm, dddd dd MMMM yyyy")</small></h2>
 <div class="row">
     <div class="col-md-6">
-        <pre>@Model.SweetStackCode</pre>
-        <h3>Screenshots</h3>
-        <p>(Ordered alphabetically)</p>
+        <div class="well">
+            @Html.ActionLink("Edit", "Edit", new { controller = "Tests", action = "Edit", id = Model.TestId })
+            <pre>@Model.SweetStackCode</pre>
+        </div>
+        <h3>Screenshots <small>(A-Z)</small></h3>
         <div class="row">
             @foreach (var img in Model.Screenshots) // Note that screenshots come out last-first
             {
@@ -25,24 +27,40 @@
     </div>
     <div class="col-md-6">
         <h4>Output</h4>
-        @foreach (var result in Model.FormattedResults)
-        {
-            if (result.Status == SweetStack.DomainObjects.FormattedTestMessage.StatusTypes.Pass)
+        <table class="table table-responsive">
+            @foreach (var result in Model.FormattedResults)
             {
-                <p class="alert alert-success">@Html.Raw(result.Message)</p>
+                if (result.Status == SweetStack.DomainObjects.FormattedTestMessage.StatusTypes.Pass)
+                {
+                    <tr class="alert alert-success">
+                        <td>
+                            @Html.Raw(result.Message)
+                        </td>
+                    </tr>
+                }
+                else if (result.Status == SweetStack.DomainObjects.FormattedTestMessage.StatusTypes.Fail)
+                {
+                    <tr class="alert alert-danger">
+                        <td>
+                            <strong>@Html.Raw(result.Message)</strong>
+                        </td>
+                    </tr>
+                }
+                else if (result.Status == SweetStack.DomainObjects.FormattedTestMessage.StatusTypes.Information)
+                {
+                    <tr class="alert alert-info">
+                        <td>@Html.Raw(result.Message)</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="alert alert-warning">
+                        <td>
+                            @Html.Raw(result.Message)
+                        </td>
+                    </tr>
+                }
             }
-            else if (result.Status == SweetStack.DomainObjects.FormattedTestMessage.StatusTypes.Fail)
-            {
-                <p class="alert alert-danger">@Html.Raw(result.Message)</p>
-            }
-            else if (result.Status == SweetStack.DomainObjects.FormattedTestMessage.StatusTypes.Information)
-            {
-                <p class="alert alert-info">@Html.Raw(result.Message)</p>
-            }
-            else
-            {
-                <p class="alert alert-warning">@Html.Raw(result.Message)</p>
-            }
-        }
+        </table>
     </div>
 </div>

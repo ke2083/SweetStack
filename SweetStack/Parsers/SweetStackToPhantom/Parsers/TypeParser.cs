@@ -25,9 +25,19 @@ namespace SweetStack.Parsers.SweetStackToPhantom.Parsers
             return new Command("type")
             {
                 Line = Js.Ln().Append(
-                    Js.Fn("page.evaluate")
-                        .Arg(Js.Fn("function")
-                            .Ln(Js.Ln().Append(string.Format("$({0}).val({1});", element.Clean(), input.Clean())))))
+                        Js.Fn("page.evaluate")
+                            .Arg(Js.Fn("function")
+                                .Ln(
+                                    Js.Ln().Append("function eventFire(el, etype){  if (el.fireEvent) {    el.fireEvent('on' + etype);  } else {    var evObj = document.createEvent('Events');    evObj.initEvent(etype, true, false);    el.dispatchEvent(evObj);  }}")
+                                )
+                                .Ln(
+                                    Js.Ln().Append(string.Format("$({0}).val({1});", element.Clean(), input.Clean()))
+                                )
+                                .Ln(
+                                    Js.Ln().Append(string.Format("eventFire($({0})[0], 'keydown')", element.Clean()))
+                                )
+                            )
+                        )
             };
         }
     }

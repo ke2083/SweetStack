@@ -4,60 +4,146 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>SweetTest</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+<h1>Edit <span class="sweetTitle">SweetTest</span></h1>
+<div class="row">
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Syntax</h3>
+                <dl>
+                    <dt>size</dt>
+                    <dd>
+                        Simulate a device (default is desktop)
+                        <br />
+                        <code>size -> smartphone</code><br />
+                        <code>size -> phablet</code><br />
+                        <code>size -> minitablet</code><br />
+                        <code>size -> tablet</code><br />
+                        <code>size -> desktop</code>
+                    </dd>
+                    <dt>open</dt>
+                    <dd>
+                        Go to a url
+                        <br />
+                        <code>open -> http://www.bing.com</code>
+                    </dd>
+                    <dt>click</dt>
+                    <dd>
+                        Click on the matching element<br />
+                        <code>click -> #myBtn</code>
+                    </dd>
+                    <dt>wait</dt>
+                    <dd>
+                        Pause for seconds
+                        <br />
+                        <code>wait -> 2</code>
+                    </dd>
+                    <dt>type</dt>
+                    <dd>
+                        Type keys to the matching element
+                        <br />
+                        <code>type .myTxtBox -> This is my test input</code>
+                    </dd>
+                    <dt>proof</dt>
+                    <dd>
+                        Takes a screenshot
+                        <br />
+                        <code>proof -> homepage.png</code>
+                    </dd>
+                    <dt>-></dt>
+                    <dd>
+                        Specifies what follows as a string of text
+                        <br />
+                        <code>
+                            type #txtBox -> Kaylee Eluvian
+                        </code>
+                    </dd>
+                    <dt>#</dt>
+                    <dd>
+                        Comment
+                        <br />
+                        <code># This is a comment</code>
+                    </dd>
+                </dl>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Timestamp, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Timestamp, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Timestamp, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Completed, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Completed)
-                    @Html.ValidationMessageFor(model => model.Completed, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SweetStackCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SweetStackCode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SweetStackCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="col-md-6">
+                <h3>Tests</h3>
+                <dl>
+                    <dt>text</dt>
+                    <dd>
+                        Checks that the specified text exists on the page
+                        <br />
+                        <code>text -> This text should appear</code>
+                    </dd>
+                    <dt>value</dt>
+                    <dd>
+                        <p>
+                            Gets the value of the specified element
+                            <br />
+                            Checks that a value <em>exactly</em> equals a string
+                            <br />
+                            <code>
+                                type #txtBox -> Kaylee Eluvian
+                            </code>
+                            <br />
+                            <code>
+                                value #txtBox => Kaylee Eluvian
+                            </code>
+                        </p>
+                        <p>
+                            Checks that a value <em>contains</em> a string
+                            <br />
+                            <code>
+                                type #txtBox -> Kaylee Eluvian
+                            </code>
+                            <br />
+                            <code>
+                                value #txtBox ~> Eluvian
+                            </code>
+                        </p>
+                        <p>
+                            Checks that a value <em>does not</em> contain a string
+                            <code>
+                                type #txtBox -> Kaylee Eluvian
+                            </code>
+                            <br />
+                            <code>
+                                value #txtBox !> Kalyee
+                            </code>
+                        </p>
+                    </dd>
+                    <dt>chose</dt>
+                    <dd>
+                        Gets whether the specified element is checked/selected
+                        <br />
+                        <code>chose -> #myChkBox</code>
+                    </dd>
+                </dl>
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div class="col-md-8">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Timestamp)
+            <div class="row">
+                @Html.TextBoxFor(model => model.Name, new { @class = "sweetTitle text-large col-md-12" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="row">
+                @Html.TextAreaFor(model => model.SweetStackCode, new { @class = "col-md-12 sweetTest", rows = 5 })
+                @Html.ValidationMessageFor(model => model.SweetStackCode, "", new { @class = "text-danger" })
+            </div>
+            <div class="row">
+                <input type="submit" value="Validate & Save" class="btn btn-success" />
+            </div>
+
+        }
+    </div>
 </div>

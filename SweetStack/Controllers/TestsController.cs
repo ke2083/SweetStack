@@ -18,7 +18,7 @@ namespace SweetStack.Controllers
         // GET: Tests
         public ActionResult Index()
         {
-            return View(db.SweetTests.ToList());
+            return View(db.SweetTests.OrderBy(t=>t.Name).ThenByDescending(t=>t.Timestamp).ToList());
         }
 
         // GET: Tests/Details/5
@@ -60,11 +60,28 @@ namespace SweetStack.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sweetTest).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var parser = new SweetStack.Parsers.SweetStackToPhantom.SweetStack();
+                var result = parser.ParseToPhantom(sweetTest.SweetStackCode.Split(Environment.NewLine.ToCharArray()).Where(s=>!string.IsNullOrEmpty(s)).ToList());
+                if (result.Success)
+                {
+                    db.Entry(sweetTest).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    result.Errors.ToList().ForEach(e => ModelState.AddModelError("SweetStackCode", e));
+                }
             }
+
             return View(sweetTest);
+        }
+
+        public ActionResult Run(Guid id)
+        {
+            var sweetTest = db.SweetTests.Find(id);
+            SweetStack.BusinessLogic.SweetTestRunner.Execute(sweetTest.Name, sweetTest.SweetStackCode, Server.MapPath("~/SweetResults"), sweetTest.Id);
+            return RedirectToRoute(new { controller="Runs", action="Index" });
         }
 
         // GET: Tests/Delete/5
@@ -88,6 +105,9 @@ namespace SweetStack.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             SweetTest sweetTest = db.SweetTests.Find(id);
+            sweetTest.Instances.ToList().ForEach(i => i.Messages.Clear());
+            db.TestRuns.RemoveRange(sweetTest.Instances);
+            sweetTest.Instances.Clear();
             db.SweetTests.Remove(sweetTest);
             db.SaveChanges();
             return RedirectToAction("Index");

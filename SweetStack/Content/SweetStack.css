@@ -1,0 +1,38 @@
+﻿@font-face {
+	font-family: 'vacantz';
+	src: url('./fonts/Vacantz/vacantz.eot');
+	src: local('vacantz'), url('./fonts/Vacantz/vacantz.woff') format('woff'), url('./fonts/Vacantz/vacantz.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'mareensprint';
+	src: url('./fonts/MareensPrint/mareensprint.eot');
+	src: local('mareensprint'), url('./fonts/MareensPrint/mareensprint.woff') format('woff'), url('./fonts/MareensPrint/mareensprint.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'opensansregular';
+	src: url('./fonts/OpenSansRegular/OpenSansRegular.eot');
+	src: local('vacantz'), url('./fonts/OpenSansRegular/OpenSansRegular.woff') format('woff'), url('./fonts/OpenSansRegular/OpenSansRegular.ttf') format('truetype');
+}
+
+.sweetTest {
+	font-family: 'mareensprint';
+    font-size: 2em;
+    color: #efefef;
+    background: #121212;
+}
+
+.sweetTitle {
+	font-family: 'vacantz'
+}
+
+.text-large {
+    font-size: 3em;
+}
+
+/* Font downloaded from FontsForWeb.com */
+
+body {
+	font-family: 'opensansregular'
+}

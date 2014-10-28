@@ -64,7 +64,7 @@ namespace SweetStack.Controllers
                 }
             }
 
-            var dir = new System.IO.DirectoryInfo(string.Format("{0}\\{1}", Server.MapPath("~/Content"), testRun.Id));
+            var dir = new System.IO.DirectoryInfo(string.Format("{0}\\{1}", Server.MapPath("~/SweetResults"), testRun.Id));
             var pngs = dir.GetFiles("*.png");
             var jpgs = dir.GetFiles("*.jpg");
             var gifs = dir.GetFiles("*.gif");
@@ -77,13 +77,14 @@ namespace SweetStack.Controllers
             var imageList = new Dictionary<string, string>();
             foreach (var img in allImages)
             {
-                imageList.Add(img.Name, string.Format("/Content/{0}/{1}", testRun.Id, img.Name));
+                imageList.Add(img.Name, string.Format("/SweetResults/{0}/{1}", testRun.Id, img.Name));
             }
 
             model.Screenshots = imageList.OrderBy(i => i.Key).ToDictionary(i => i.Key, i => i.Value);
             model.FormattedResults = formattedMessage;
             model.Timestamp = testRun.Started;
             model.SweetStackCode = testRun.SweetTest.SweetStackCode;
+            model.TestId = testRun.SweetTest.Id;
             return View(model);
 
         }

@@ -86,7 +86,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\SweetStack.css" />
     <Content Include="Global.asax" />
+    <Content Include="img\close.png" />
+    <Content Include="img\loading.gif" />
+    <Content Include="img\next.png" />
+    <Content Include="img\prev.png" />
     <Content Include="libs\phantomjs\phantomjs.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -101,6 +106,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BusinessLogic\PhantomLogger.cs" />
+    <Compile Include="BusinessLogic\SweetTestRunner.cs" />
     <Compile Include="Controllers\ImgController.cs" />
     <Compile Include="Controllers\ParseController.cs" />
     <Compile Include="Controllers\RunsController.cs" />
@@ -150,10 +156,18 @@
     <Content Include="Views\Runs\Index.cshtml" />
     <Content Include="Views\Runs\Details.cshtml" />
     <Content Include="Views\Tests\Create.cshtml" />
-    <Content Include="Views\Tests\Delete.cshtml" />
-    <Content Include="Views\Tests\Details.cshtml" />
     <Content Include="Views\Tests\Edit.cshtml" />
     <Content Include="Views\Tests\Index.cshtml" />
+    <Content Include="Content\fonts\MareensPrint\mareensprint.eot" />
+    <Content Include="Content\fonts\MareensPrint\mareensprint.ttf" />
+    <Content Include="Content\fonts\MareensPrint\mareensprint.woff" />
+    <Content Include="Content\fonts\OpenSansRegular\OpenSansRegular.eot" />
+    <Content Include="Content\fonts\OpenSansRegular\OpenSansRegular.ttf" />
+    <Content Include="Content\fonts\OpenSansRegular\OpenSansRegular.woff" />
+    <Content Include="Content\fonts\Vacantz\vacantz.eot" />
+    <Content Include="Content\fonts\Vacantz\vacantz.ttf" />
+    <Content Include="Content\fonts\Vacantz\vacantz.woff" />
+    <Content Include="Views\Tests\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -163,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="SweetResults\" />
     <Folder Include="Views\Parse\" />
   </ItemGroup>
   <PropertyGroup>

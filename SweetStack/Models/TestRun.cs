@@ -11,6 +11,7 @@ namespace SweetStack.Models
         public List<FormattedTestMessage> FormattedResults { get; set; }
         public Dictionary<string, string> Screenshots { get; set; }
         public DateTime Timestamp { get; set; }
+        public Guid TestId { get; set; }
         public string SweetStackCode { get; set; }
     }
 }
