@@ -16,11 +16,15 @@
 	src: local('vacantz'), url('./fonts/OpenSansRegular/OpenSansRegular.woff') format('woff'), url('./fonts/OpenSansRegular/OpenSansRegular.ttf') format('truetype');
 }
 
+label {
+    cursor: pointer;
+}
+
 .sweetTest {
 	font-family: 'mareensprint';
-    font-size: 2em;
-    color: #efefef;
-    background: #121212;
+	font-size: 2em;
+	color: #efefef;
+	background: #121212;
 }
 
 .sweetTitle {
@@ -28,7 +32,7 @@
 }
 
 .text-large {
-    font-size: 3em;
+	font-size: 3em;
 }
 
 /* Font downloaded from FontsForWeb.com */

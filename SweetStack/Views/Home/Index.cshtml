@@ -4,68 +4,68 @@
 
 <script>
 
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-            $('#submitSuite').click(function () {
+        $('#submitSuite').click(function () {
 
-                var code = $('#sweetStackCode').val();
-                $.post('/Parse/Validate', { sweetStackCode: code }, function (result) {
+            var code = $('#sweetStackCode').val();
+            $.post('/Parse/Validate', { sweetStackCode: code }, function (result) {
 
-                    if (result.Success) {
-                        $('#validation').removeClass('alert alert-danger').addClass('alert alert-success').html('This is valid Sweet Stack code :)')
-                    }
-                    else {
-                        var err = "<ul>";
-                        for (var i = 0; i < result.Errors.length; i++) {
-                            err += '<li>' + result.Errors[i] + '</li>';
-                        }
-
-                        err += '</ul>';
-
-                        $('#validation').removeClass('alert alert-success').addClass('alert alert-danger').html(err)
+                if (result.Success) {
+                    $('#validation').removeClass('alert alert-danger').addClass('alert alert-success').html('This is valid Sweet Stack code :)')
+                }
+                else {
+                    var err = "<ul>";
+                    for (var i = 0; i < result.Errors.length; i++) {
+                        err += '<li>' + result.Errors[i] + '</li>';
                     }
 
-                });
+                    err += '</ul>';
 
-                return false;
+                    $('#validation').removeClass('alert alert-success').addClass('alert alert-danger').html(err)
+                }
 
             });
 
-            $('#runSuite').click(function (e) {
-
-                var code = $('#sweetStackCode').val();
-                var name = $('#testName').val();
-                $.post('/Parse/Run', { sweetStackCode: code, name: name }, function (result) {
-
-                    if (result.Success) {
-                        $('#validation').removeClass('alert alert-danger').addClass('alert alert-success').html('This is valid Sweet Stack code :)')
-                    }
-                    else {
-                        var err = "<ul>";
-                        for (var i = 0; i < result.Errors.length; i++) {
-                            err += '<li>' + result.Errors[i] + '</li>';
-                        }
-
-                        err += '</ul>';
-
-                        $('#validation').removeClass('alert alert-success').addClass('alert alert-danger').html(err)
-                        e.preventDefault();
-                        return false;
-                    }
-
-                });
-
-
-
-            });
+            return false;
 
         });
+
+        $('#runSuite').click(function (e) {
+
+            var code = $('#sweetStackCode').val();
+            var name = $('#testName').val();
+            $.post('/Parse/Run', { sweetStackCode: code, name: name }, function (result) {
+
+                if (result.Success) {
+                    $('#validation').removeClass('alert alert-danger').addClass('alert alert-success').html('This is valid Sweet Stack code :)')
+                }
+                else {
+                    var err = "<ul>";
+                    for (var i = 0; i < result.Errors.length; i++) {
+                        err += '<li>' + result.Errors[i] + '</li>';
+                    }
+
+                    err += '</ul>';
+
+                    $('#validation').removeClass('alert alert-success').addClass('alert alert-danger').html(err)
+                    e.preventDefault();
+                    return false;
+                }
+
+            });
+
+
+
+        });
+
+    });
 
 
 </script>
 
 <h1 class="sweetTitle">New SweetTest</h1>
-<hr/>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <div class="row">
@@ -186,15 +186,160 @@
     <div class="col-md-8 well well-small">
         <h3>Test code</h3>
         <div id="validation"></div>
-        <input type="text" class="col-md-12 sweetTitle text-large" required title="Tests need a title" value="UntitledTest" id="testName" />
+        <input type="text" class="col-md-12 sweetTitle text-large" required title="Tests need a title" value="UntitledTest" id="name" />
         <div>
-            <textarea class="col-md-12 sweetTest" style="height: 10em" id="sweetStackCode">open -> http://www.bing.com
-proof -> bing.png
-type input.b_searchbox -> javascript
-click -> #sb_form_go
-wait -> 1
-text -> 18,000,000 results
-proof -> bing_search.png</textarea>
+            <textarea class="col-md-12 sweetTest" style="height: 10em" id="sweetStackCode">
+                open -> http://www.bing.com
+                proof -> bing.png
+                type input.b_searchbox -> javascript
+                click -> #sb_form_go
+                wait -> 1
+                text -> 18,000,000 results
+                proof -> bing_search.png
+            </textarea>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Target</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <fieldset >
+                    <legend>Browsers</legend>
+                    <ul class="list-unstyled col-md-12">
+                        <li class="row">
+                            <label class="row col-md-12">
+                                <span class="col-md-2">
+                                    <input type="checkbox" checked="checked" id="targetWebkit" class="pull-right" />
+                                </span> 
+                                <span class="col-md-6">
+                                    WebKit (Chrome/Safari)
+                                </span>
+                                <span class="col-md-4">
+                                    <img src="~/Content/browsers/webkit.png" />
+                                </span>
+                            </label>
+                        </li>
+                        <li class="row">
+                            <label class="row col-md-12">
+                                <span class="col-md-2">
+                                    <input type="checkbox" checked="checked" id="targetIE8" class="pull-right" />
+                                </span>
+                                <span class="col-md-6">
+                                    Trident 4 (IE8)
+                                </span>
+                                <span class="col-md-4">
+                                    <img src="~/Content/browsers/trident4.png" />
+                                </span>
+                            </label>
+                        </li>
+                        <li class="row">
+                            <label class="row col-md-12">
+                                <span class="col-md-2">
+                                    <input type="checkbox" checked="checked" id="targetIE9" class="pull-right" />
+                                </span>
+                                <span class="col-md-6">
+                                    Trident 5 (IE9)
+                                </span>
+                                <span class="col-md-4">
+                                    <img src="~/Content/browsers/trident5.png" />
+                                </span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" checked="checked" id="targetIE10" /> Trident 6 (IE10)
+                                <img src="~/Content/browsers/trident6.png" />
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" checked="checked" id="targetIE11" /> Trident 7 (IE11)
+                                <img src="~/Content/browsers/trident7.png" />
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" disabled id="targetFirefox" /> Ghecko (Firefox)
+                                <img src="~/Content/browsers/ghecko.png" />
+                            </label>
+                        </li>
+                    </ul>
+                </fieldset>
+            </div>
+            <div class="col-md-6">
+                <fieldset >
+                    <legend>Devices</legend>
+                    <ul class="list-unstyled col-md-12">
+                        <li class="row">
+                            <label class="row col-md-12">
+                                <span class="col-md-2">
+                                    <input type="checkbox" checked="checked" id="targetSmartphone" class="pull-right" />
+                                </span>
+                                <span class="col-md-6">
+                                    Smartphone
+                                </span>
+                                <span class="col-md-4">
+                                    <img src="~/Content/devices/smartphone.png" />
+                                </span>
+                            </label>
+                        </li>
+                        <li class="row">
+                            <label class="row col-md-12">
+                                <span class="col-md-2">
+                                    <input type="checkbox" checked="checked" class="pull-right" id="targetPhablet" />
+                                </span>
+                                <span class="col-md-6">
+                                    Phablet
+                                </span>
+                                <span class="col-md-4">
+                                    <img src="~/Content/devices/phablet.png" />
+                                </span>
+                            </label>
+                        </li>
+                        <li class="row">
+                            <label class="row col-md-12">
+                                <span class="col-md-2">
+                                    <input type="checkbox" checked="checked" id="targetPortraitTablet" class="pull-right" />
+                                </span>
+                                <span class="col-md-6">
+                                    Portrait tablet
+                                </span>
+                                <span class="col-md-4">
+                                    <img src="~/Content/devices/portraitTablet.png" />
+                                </span>
+                            </label>
+                        </li>
+                        <li class="row">
+                            <label class="row col-md-12">
+                                <span class="col-md-2">
+                                    <input type="checkbox" checked="checked" id="targetLandscapeTablet" class="pull-right" />
+                                </span>
+                                <span class="col-md-6">
+                                    Landscape tablet
+                                </span>
+                                <span class="col-md-4">
+                                    <img src="~/Content/devices/landscapeTablet.png" />
+                                </span>
+                            </label>
+                        </li>
+                        <li class="row">
+                            <label class="row col-md-12"> 
+                                <span class="col-md-2">
+                                    <input type="checkbox" checked="checked" id="targetDesktop" class="pull-right" />
+                                </span> 
+                                <span class="col-md-6">
+                                    Desktop
+                                </span>
+                                <span class="col-md-4">
+                                    <img src="~/Content/devices/desktop.png" />
+                                </span>
+                            </label>
+                        </li>
+                    </ul>
+                </fieldset>
+            </div>
         </div>
         <p>
             <button class="btn btn-success" id="submitSuite">Validate</button>

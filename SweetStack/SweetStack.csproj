@@ -86,6 +86,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\browsers\ghecko.png" />
+    <Content Include="Content\browsers\trident4.png" />
+    <Content Include="Content\browsers\trident5.png" />
+    <Content Include="Content\browsers\trident6.png" />
+    <Content Include="Content\browsers\trident7.png" />
+    <Content Include="Content\browsers\webkit.png" />
+    <Content Include="Content\devices\desktop.png" />
+    <Content Include="Content\devices\landscapeTablet.png" />
+    <Content Include="Content\devices\phablet.png" />
+    <Content Include="Content\devices\portraitTablet.png" />
+    <Content Include="Content\devices\smartphone.png" />
     <Content Include="Content\SweetStack.css" />
     <Content Include="Global.asax" />
     <Content Include="img\close.png" />
